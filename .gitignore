@@ -1,0 +1,67 @@
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Node (if used for frontend build steps)
+node_modules/
+
+# Python caches (if Python is ever used)
+__pycache__/
+*.py[cod]
+
+# Visual Studio / .NET build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# DotNet user secrets
+**/secrets.json
+
+# Rider / VS Code / other IDE artifacts
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Docker-related
+**/.dockerignore
+docker-compose.override.yml
+
+# Backup files
+*.bak
+
+# Coverage reports
+coverage/
+*.coverlet.*
+*.coverage
+*.coverage.xml
+
+# Build artifacts
+dist/
+out/
+
+# If using Terraform (common for IaC)
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# If using Bicep (no specific ignore needed unless you generate files)
+# Just in case of generated ARM templates from Bicep:
+*.json (if you're generating ARM templates from bicep, you may ignore them)
+
+# Ignore generated files from GitHub Actions (if any)
+.github/workflows/*.sh
+
+# Misc
+*.lock

@@ -1,0 +1,38 @@
+name: Build and Push
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      # Devs must add their own build steps here.
+      # For example, if it's a .NET app, they'd add 'actions/setup-dotnet' and run 'dotnet build'.
+      # If it's a Node.js app, they'd run npm install && npm run build, etc.
+
+      - name: Build Docker image
+        run: |
+          # Devs will customize this step once they have their application code.
+          docker build -t $REGISTRY_NAME.azurecr.io/$APP_NAME:latest .
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Azure Container Registry Login
+        run: az acr login --name $REGISTRY_NAME
+
+      - name: Push image
+        run: docker push $REGISTRY_NAME.azurecr.io/$APP_NAME:latest
